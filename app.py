@@ -4,7 +4,7 @@ import time # Importado apenas para simular o "Verificar Status"
 # ==========================================
 # 🛑 CONTROLE DE MANUTENÇÃO (LIGAR/DESLIGAR)
 # ==========================================
-EM_MANUTENCAO = True  # Mude para False quando quiser liberar o site normal
+EM_MANUTENCAO = False  # Mude para False quando quiser liberar o site normal
 
 if EM_MANUTENCAO:
     # --- CONFIGURAÇÃO DA TELA DE MANUTENÇÃO ---
