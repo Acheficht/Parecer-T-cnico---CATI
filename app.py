@@ -61,9 +61,6 @@ if EM_MANUTENCAO:
 # Tudo abaixo desta linha só vai aparecer quando você mudar
 # EM_MANUTENCAO = False lá no topo.
 
-st.title("Sistema de Relatórios v2.0")
-st.write("Bem-vindo ao sistema atualizado!")
-
 # ... Cole aqui suas 1000 linhas de código do sistema principal ...
 import streamlit as st
 from docx import Document
