@@ -1,4 +1,71 @@
 import streamlit as st
+import time # Importado apenas para simular o "Verificar Status"
+
+# ==========================================
+# 🛑 CONTROLE DE MANUTENÇÃO (LIGAR/DESLIGAR)
+# ==========================================
+EM_MANUTENCAO = True  # Mude para False quando quiser liberar o site normal
+
+if EM_MANUTENCAO:
+    # --- CONFIGURAÇÃO DA TELA DE MANUTENÇÃO ---
+    st.set_page_config(page_title="Em Manutenção", page_icon="🚧", layout="centered")
+
+    # Layout: Coluna da esquerda (Mensagem) e direita (Status)
+    col1, col2 = st.columns([2, 1])
+
+    with col1:
+        st.title("🚧 Estamos em Manutenção")
+        st.markdown("""
+        ### O sistema está evoluindo.
+        Estamos implementando uma atualização radical para a **Versão 2.0**.
+        
+        **O que muda?**
+        * 🚀 Melhor performance.
+        * 📂 Geração de documentos mais rápida.
+        * ✨ Nova interface visual.
+        
+        Agradecemos a paciência!
+        """)
+        st.write("")
+        st.info("Status atual: **Finalizando ajustes no servidor**")
+        
+        # Barra de progresso visual
+        st.progress(85)
+
+    with col2:
+        st.subheader("🛠️ Ferramentas")
+        st.write("Precisa de ajuda urgente?")
+        
+        # Botão simples de status (sem banco de dados)
+        if st.button("🔄 Verificar Status"):
+            with st.spinner("Checando servidores..."):
+                time.sleep(1.5) # Simula um carregamento
+                st.success("Sistemas: 🟢 Online")
+                st.warning("App: 🟡 Em Atualização")
+        
+        st.divider()
+        
+        st.caption("Dúvidas ou suporte:")
+        st.code("carlos.car.cati@gmail.com", language="text")
+
+    st.divider()
+    st.caption("© 2026 Equipe de Desenvolvimento - PRODESP")
+    
+    # 🛑 BLOQUEIO TOTAL
+    # O comando abaixo impede que o resto do código rode.
+    st.stop() 
+
+# ==========================================
+# 🚀 SEU CÓDIGO DO SITE NORMAL COMEÇA AQUI
+# ==========================================
+# Tudo abaixo desta linha só vai aparecer quando você mudar
+# EM_MANUTENCAO = False lá no topo.
+
+st.title("Sistema de Relatórios v2.0")
+st.write("Bem-vindo ao sistema atualizado!")
+
+# ... Cole aqui suas 1000 linhas de código do sistema principal ...
+import streamlit as st
 from docx import Document
 from docx.shared import Pt, Cm
 from docx.enum.text import WD_ALIGN_PARAGRAPH
