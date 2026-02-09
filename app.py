@@ -77,7 +77,7 @@ from PIL import Image
 import uuid
 
 # --- 1. CONFIGURAÇÃO INICIAL E CSS ---
-st.set_page_config(page_title="Parecer Técnico v1.0 (Item Personalizado)", layout="wide")
+st.set_page_config(page_title="Parecer Técnico v16 (Item Personalizado)", layout="wide")
 
 st.markdown("""
 <style>
@@ -128,7 +128,7 @@ OPCOES_LISTA = [
     "Inconsistências em Regularidade do IR",
     "Inconsistência Adicional",
     "Observação",
-    "Item Personalizado ✏️"  # <--- NOVA OPÇÃO
+    "Item Personalizado ✏️" # <--- NOVA OPÇÃO
 ]
 
 # --- 3. GERENCIAMENTO DE ESTADO ---
@@ -149,7 +149,7 @@ if 'uploader_ids' not in st.session_state:
 def adicionar_item():
     opcao = st.session_state.get("selecao_adicionar")
     if opcao:
-        novo_id = str(uuid.uuid4()) 
+        novo_id = str(uuid.uuid4())
         
         # Verifica se é o item personalizado
         eh_personalizado = (opcao == "Item Personalizado ✏️")
@@ -257,7 +257,7 @@ class PDF(FPDF):
             if not linha.strip():
                 self.ln(line_height)
                 continue
-            self.write(line_height, "      ") 
+            self.write(line_height, "      ")
             partes = linha.split('**')
             for i, parte in enumerate(partes):
                 if i % 2 == 1:
@@ -350,7 +350,7 @@ with st.sidebar:
                 st.session_state['dados'] = dados_carregados
                 for k in ["car", "sp_not", "imovel", "nome", "doc", "cidade"]:
                     st.session_state[f"input_{k}"] = dados_carregados.get(k, "")
-                
+                    
                 st.session_state['uploader_ids'] = {} 
                 st.success("✅ Carregado com Sucesso!")
                 st.rerun()
@@ -362,6 +362,26 @@ with st.sidebar:
     st.download_button("💾 Salvar Backup", dados_download, "backup_multi_v14.json", "application/json")
     st.markdown("---")
     st.button("🗑️ Limpar Tudo", on_click=limpar_tudo, type="primary")
+
+    # =======================================================
+    # NOVO BLOCO "SOBRE" (Adicionado conforme pedido)
+    # =======================================================
+    st.markdown("---")
+    st.markdown("### ℹ️ Sobre a Ferramenta")
+    st.info(
+        """
+        **Desenvolvido pela Equipe Técnica:**
+        
+        * Carlos Eduardo
+        * Geysiara Santos
+        * Gabriel Santos
+        * Eliane de Souza
+        * Nathalia Plata
+        
+        🚀 *Desenvolvido utilizando Inteligência Artificial Gemini*
+        """
+    )
+    # =======================================================
 
 # --- 8. INTERFACE PRINCIPAL ---
 st.title("📄 Gerador de Parecer Técnico (Com Item Personalizável)")
@@ -396,7 +416,7 @@ with tab_edit:
     with col_sel:
         st.selectbox("Escolha o tipo de item para adicionar:", OPCOES_LISTA, key="selecao_adicionar")
     with col_add:
-        st.write(""); st.write("") 
+        st.write(""); st.write("")
         st.button("➕ Adicionar", on_click=adicionar_item, type="primary")
 
     st.markdown("---")
@@ -447,7 +467,7 @@ with tab_edit:
                     
                     if texto: st.session_state['dados']['textos'][id_item] = texto
                     elif id_item in st.session_state['dados']['textos'] and not texto:
-                         del st.session_state['dados']['textos'][id_item]
+                       del st.session_state['dados']['textos'][id_item]
                     
                     st.markdown("#### 🖼️ Imagens")
                     lista_imgs = st.session_state['dados']['imagens_b64'].get(id_item, [])
@@ -464,7 +484,7 @@ with tab_edit:
                     
                     uid = st.session_state['uploader_ids'].get(id_item, 0)
                     key_uploader = f"uploader_{id_item}_{uid}"
-                    st.file_uploader(f"Adicionar imagem", type=['png','jpg','jpeg'], key=key_uploader, on_change=processar_upload, args=(id_item,), label_visibility="collapsed")
+                    st.file_uploader(f"Adicionar imagem", type=['png', 'jpg', 'jpeg'], key=key_uploader, on_change=processar_upload, args=(id_item,), label_visibility="collapsed")
 
 with tab_preview:
     st.info("Visualização do PDF.")
@@ -481,7 +501,7 @@ st.markdown("---")
 st.subheader("🚀 Baixar Arquivos")
 col_d1, col_d2 = st.columns(2)
 nome_safe = st.session_state['dados']['nome'].strip() or "Parecer"
-nome_arquivo = "".join([c for c in nome_safe if c.isalnum() or c in (' ','-','_')]).strip()
+nome_arquivo = "".join([c for c in nome_safe if c.isalnum() or c in (' ', '-', '_')]).strip()
 
 if st.session_state['dados']['car']:
     # WORD - GERAÇÃO CORRIGIDA
