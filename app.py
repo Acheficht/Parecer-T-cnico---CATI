@@ -77,7 +77,7 @@ from PIL import Image
 import uuid
 
 # --- 1. CONFIGURAÇÃO INICIAL E CSS ---
-st.set_page_config(page_title="Parecer Técnico v1.0 (Item Personalizado)", layout="wide")
+st.set_page_config(page_title="Parecer Técnico v1.0", layout="wide")
 
 st.markdown("""
 <style>
